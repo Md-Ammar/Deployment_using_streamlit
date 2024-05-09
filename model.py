@@ -16,10 +16,13 @@ def split_data(test_size):
     x_train, x_test, y_train, y_test = train_test_split(data.data, data.target, test_size=test_size, random_state=42)
     return x_train, x_test, y_train, y_test
 
-x_train, x_test, y_train, y_test = split_data(0.2)
-
-def run_model():
+def get_score():
     global x_train, x_test, y_train, y_test, Model
+    return Model.score(x_test, y_test)    
+
+def run_model(test_size):
+    global x_train, x_test, y_train, y_test, Model
+    x_train, x_test, y_train, y_test = split_data(test_size)
     Model.fit(x_train, y_train)
     print("Model trained successfully!")
     
